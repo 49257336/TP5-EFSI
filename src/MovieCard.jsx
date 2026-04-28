@@ -3,7 +3,7 @@ import './MovieCard.css'
 function MovieCard({ movie, onClick }) {
     const poster = movie.Poster !== "N/A"
         ? movie.Poster
-        : "https://via.placeholder.com/300x450";
+        : "https://placehold.co/300x450/png";
 
     return (
         <div className="movie-card" onClick={onClick} style={{ cursor: "pointer" }}>
