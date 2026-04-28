@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { getMovieById } from "../services/api";
+import { getMovieById } from "./api.jsx";
 import Loader from "./Loader";
 import ErrorMessage from "./ErrorMessage";
+import './MovieDetail.css'
 
 function MovieDetail({ imdbID }) {
     const [movie, setMovie] = useState(null);
@@ -40,10 +41,10 @@ function MovieDetail({ imdbID }) {
         : "https://via.placeholder.com/300x450";
 
     return (
-        <div>
-            <h2>{movie.Title || "Sin título"}</h2>
-
+        <div className="movie-detail">
             <img src={poster} alt={movie.Title} />
+            <div className="movie-detail-info">
+            <h2>{movie.Title || "Sin título"}</h2>
 
             <p><strong>Año:</strong> {movie.Year || "No disponible"}</p>
             <p><strong>Género:</strong> {movie.Genre || "No disponible"}</p>
@@ -54,6 +55,7 @@ function MovieDetail({ imdbID }) {
             <p><strong>Idioma:</strong> {movie.Language || "No disponible"}</p>
             <p><strong>País:</strong> {movie.Country || "No disponible"}</p>
             <p><strong>IMDb:</strong> {movie.imdbRating || "No disponible"}</p>
+            </div>
         </div>
     );
 }

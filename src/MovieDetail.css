@@ -1,0 +1,29 @@
+.movie-detail {
+    display: flex;
+    gap: 30px;
+    margin-top: 2%;
+    background-color: #1f1f1f;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.movie-detail img {
+    width: 300px;
+    border-radius: 10px;
+}
+
+.movie-detail-info {
+    max-width: 600px;
+}
+
+.movie-detail h2 {
+    margin-top: 0;
+    color: #fff;
+}
+
+.movie-detail p {
+    margin: 8px 0;
+}
+
+

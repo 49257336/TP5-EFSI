@@ -1,20 +1,50 @@
 import { useState } from 'react'
 import SearchBar from './SearchBar.jsx'
 import MovieList from './MovieList.jsx'
+import MovieDetail from './MovieDetail.jsx'
+import Loader from './Loader.jsx'
+import ErrorMessage from './ErrorMessage.jsx'
+import { searchMovies } from './api.jsx'
 import './App.css'
-//API key https://www.omdbapi.com/apikey.aspx?__EVENTTARGET=freeAcct&__EVENTARGUMENT=&__LASTFOCUS=&__VIEWSTATE=%2FwEPDwUKLTIwNDY4MTIzNQ9kFgYCAQ9kFgICBw8WAh4HVmlzaWJsZWhkAgIPFgIfAGhkAgMPFgIfAGhkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYDBQtwYXRyZW9uQWNjdAUIZnJlZUFjY3QFCGZyZWVBY2N0MXBaUo2PpHbEmO0KsvHCBMiAqbwPSispxmMnBH5rXb8%3D&__VIEWSTATEGENERATOR=5E550F58&__EVENTVALIDATION=%2FwEdAAV6O6wfBwA%2F81aWW2BYfVtumSzhXfnlWWVdWIamVouVTzfZJuQDpLVS6HZFWq5fYpioiDjxFjSdCQfbG0SWduXFd8BcWGH1ot0k0SO7CfuulGztfcyzE1Lkxwo9dYYBItHiFDZeQhYzawd9QWEG%2BI9i&at=freeAcct&Email=
-//  https://www.omdbapi.com/
+
 function App() {
-const [selectedId, setSelectedId] = useState(null);
-return (
-        <div>
+    const [movies, setMovies] = useState([]);
+    const [selectedId, setSelectedId] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [hasSearched, setHasSearched] = useState(false);
+
+    const handleSearch = async (query) => {
+        setLoading(true);
+        setError(null);
+        setHasSearched(true);
+
+        try {
+            const data = await searchMovies(query);
+
+            if (data.Response === "False") {
+                setMovies([]);
+            } else {
+                setMovies(data.Search);
+            }
+        } catch (err) {
+            setError("Error al buscar películas");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div className="container">
             <h1>Buscador de Películas</h1>
 
             <SearchBar onSearch={handleSearch} />
 
             {loading && <Loader />}
             {error && <ErrorMessage message={error} />}
-            {!loading && movies.length === 0 && <p>Sin resultados</p>}
+            {hasSearched && !loading && !error && movies.length === 0 && (
+    <p>Sin resultados</p>
+)}
 
             <MovieList movies={movies} onSelect={setSelectedId} />
 
@@ -23,4 +53,4 @@ return (
     );
 }
 
-export default App
+export default App;
