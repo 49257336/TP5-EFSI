@@ -4,7 +4,7 @@ import MovieList from './MovieList.jsx'
 import MovieDetail from './MovieDetail.jsx'
 import Loader from './Loader.jsx'
 import ErrorMessage from './ErrorMessage.jsx'
-import { searchMovies } from './api.jsx'
+import { searchMovies } from './api.js'
 import './App.css'
 
 function App() {

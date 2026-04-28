@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getMovieById } from "./api.jsx";
+import { getMovieById } from "./api.js";
 import Loader from "./Loader";
 import ErrorMessage from "./ErrorMessage";
 import './MovieDetail.css'
