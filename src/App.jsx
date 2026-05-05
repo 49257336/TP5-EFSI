@@ -35,21 +35,25 @@ function App() {
     };
 
     return (
-        <div className="container">
+        <div className="app">
+        <header className="header">
             <h1>Buscador de Películas</h1>
-
             <SearchBar onSearch={handleSearch} />
+        </header>
 
+        <div className="container">
             {loading && <Loader />}
             {error && <ErrorMessage message={error} />}
+
             {hasSearched && !loading && !error && movies.length === 0 && (
-    <p>Sin resultados</p>
-)}
+                <p className="no-results">Sin resultados</p>
+            )}
 
             <MovieList movies={movies} onSelect={setSelectedId} />
 
             {selectedId && <MovieDetail imdbID={selectedId} />}
         </div>
+    </div>
     );
 }
 
